@@ -25,14 +25,13 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const { data: pullRequest } = await github.pulls.get({
+            const { data: reviews } = await github.pulls.listReviews({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: context.issue.number,
             });
-
-            const approvals = pullRequest.reviews.filter(review => review.state === 'APPROVED').length;
-            core.setOutput('approvals', approvals);
+            const approvedReviews = reviews.filter(review => review.state === 'APPROVED' && review.user.login !== context.actor);
+            core.setOutput('approvals', approvedReviews.length);
 
   manual-approval:
     runs-on: ubuntu-latest
