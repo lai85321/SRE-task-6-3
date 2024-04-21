@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-app-project
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  # Project description
+  description: Learning CICD
+  # Allow manifests to deploy from any Git repos
+  source:
+    path: src/application
+    repoURL: https://github.com/lai85321/SRE-task-6-3.git
+    targetRevision: main
+  destinations:
+    - namespace: default
+      server: https://kubernetes.default.svc
