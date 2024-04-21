@@ -6,17 +6,16 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
+  project: default
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-  # Project description
-  description: Learning CICD
   # Allow manifests to deploy from any Git repos
   source:
     path: src/application
     repoURL: https://github.com/lai85321/SRE-task-6-3.git
     targetRevision: main
-  destinations:
-    - namespace: default
-      server: https://kubernetes.default.svc
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
