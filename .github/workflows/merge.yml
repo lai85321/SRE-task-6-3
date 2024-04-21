@@ -24,4 +24,4 @@ jobs:
         with:
           secret: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           approvers: lai85321
-          minimum-approvals: 1
+          minimum-approvals: 2
