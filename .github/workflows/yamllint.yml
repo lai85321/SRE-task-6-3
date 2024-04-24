@@ -1,0 +1,21 @@
+name: Check yaml lint
+on:
+  push:
+    branches: "**"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: "Yamllint"
+        uses: karancode/yamllint-github-action@master
+        id: yamllint
+        with:
+          yamllint_file_or_dir: "src/application"
+          yamllint_strict: false
+          yamllint_comment: true
+        env:
+          GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
