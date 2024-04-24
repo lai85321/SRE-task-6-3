@@ -1,5 +1,4 @@
-name: CI/CD Pipeline
-
+name: Check yaml lint
 on:
   push:
     branches: '**'
